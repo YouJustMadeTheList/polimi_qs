@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>87° con le mani legate — Politecnico di Milano, QS 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night:  #0B1F3A;
+    --gold:   #C9943A;
+    --gold-l: #F0D080;
+    --paper:  #F5F0E8;
+    --ink:    #1A1A2E;
+    --muted:  #5A6478;
+    --red:    #B03A2E;
+    --green:  #1E8449;
+    --line:   #D8D0C0;
+    --card:   #FFFFFF;
+    --display: 'Playfair Display', Georgia, serif;
+    --body:    'Inter', system-ui, sans-serif;
+    --mono:    'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  .hero {
+    background: var(--night);
+    color: #E8EDF3;
+    padding: 80px 0 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold-l);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(42px, 8vw, 78px);
+    line-height: 1.0;
+    font-weight: 900;
+    letter-spacing: -.02em;
+    max-width: 14ch;
+    margin-bottom: 10px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold-l); }
+  .hero-sub {
+    font-size: 17px;
+    color: #9AAEC2;
+    max-width: 50ch;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #6B7F96;
+    letter-spacing: .03em;
+  }
+  .scale-wrap { margin: 44px 0 0; display: flex; justify-content: center; }
+  .scale-svg { width: 100%; max-width: 520px; height: auto; display: block; }
+
+  .stat-strip { background: var(--night); color: white; padding: 36px 0; }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+  .stat-item { padding: 0 20px; border-right: 1px solid rgba(255,255,255,.1); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--display);
+    font-size: clamp(34px, 5.5vw, 52px);
+    font-weight: 900;
+    color: var(--gold-l);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #7A90AA;
+    margin-top: 6px;
+    display: block;
+  }
+
+  article { padding: 60px 0 20px; }
+  article p { margin-bottom: 22px; max-width: 68ch; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    margin: 52px 0 16px;
+    color: var(--night);
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  strong { font-weight: 600; }
+
+  .penalties { margin: 28px 0; display: flex; flex-direction: column; gap: 12px; }
+  .pill {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    border-left: 4px solid var(--red);
+  }
+  .pill-icon {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--red);
+    background: #FDF0EE;
+    border-radius: 6px;
+    padding: 4px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+    letter-spacing: .04em;
+  }
+  .pill-text { font-size: 15.5px; line-height: 1.55; }
+  .pill-text strong { color: var(--night); }
+
+  .compare-wrap { margin: 36px 0; overflow-x: auto; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .compare-table thead tr { background: var(--night); color: white; }
+  .compare-table th {
+    padding: 13px 16px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .compare-table th:not(:first-child) { text-align: center; }
+  .compare-table td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .compare-table td:not(:first-child) { text-align: center; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table tbody tr:nth-child(even) { background: rgba(0,0,0,.025); }
+  .td-indicator { font-weight: 500; }
+  .td-weight { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .td-polimi { font-weight: 700; color: var(--night); }
+  .td-harvard { color: var(--muted); font-size: 13.5px; }
+  .badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .badge-win { background: #D5F0E0; color: var(--green); }
+  .badge-close { background: #FFF3D6; color: #8B6914; }
+  .badge-gap { background: #FDECEA; color: var(--red); }
+  .table-note { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 10px; line-height: 1.5; }
+
+  .pull {
+    margin: 44px 0;
+    padding: 32px 34px;
+    background: var(--night);
+    border-radius: 16px;
+    color: #E8EDF3;
+    position: relative;
+  }
+  .pull::before {
+    content: '\201C';
+    font-family: var(--display);
+    font-size: 88px;
+    color: var(--gold);
+    position: absolute;
+    top: -8px;
+    left: 22px;
+    line-height: 1;
+    opacity: .55;
+  }
+  .pull p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(17px, 2.4vw, 22px);
+    line-height: 1.45;
+    color: #E8EDF3;
+    max-width: 52ch;
+    padding-top: 26px;
+    margin-bottom: 0;
+  }
+  .pull-attr {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-l);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .trajectory {
+    margin: 36px 0;
+    padding: 26px 28px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .traj-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .traj-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .traj-row:last-child { margin-bottom: 0; }
+  .traj-year { font-family: var(--mono); font-size: 12px; color: var(--muted); width: 40px; flex-shrink: 0; }
+  .traj-bar-wrap { flex: 1; height: 7px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .traj-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-l)); border-radius: 4px; }
+  .traj-pos { font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: var(--night); width: 44px; text-align: right; flex-shrink: 0; }
+
+  .disclaimer {
+    margin: 44px 0;
+    padding: 20px 24px;
+    background: #F0EDE6;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    border-left: 3px solid var(--muted);
+  }
+  .disclaimer-tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .disclaimer p { font-size: 14.5px; color: var(--muted); line-height: 1.6; max-width: 64ch; margin-bottom: 0; }
+
+  .cta {
+    margin: 56px 0 10px;
+    padding: 32px 30px;
+    background: linear-gradient(135deg, #0B1F3A 0%, #152E50 100%);
+    border-radius: 18px;
+    color: #E8EDF3;
+  }
+  .cta-tag { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-l); margin-bottom: 8px; }
+  .cta h3 { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.2; color: white; margin-bottom: 8px; }
+  .cta p { font-size: 15px; color: #8FA5BC; max-width: 54ch; margin-bottom: 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 60px; margin-top: 40px; font-family: var(--mono); font-size: 12px; color: var(--muted); line-height: 1.7; }
+  footer b { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    .stat-row { grid-template-columns: 1fr; gap: 20px; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); padding-bottom: 20px; }
+    .stat-item:last-child { border-bottom: none; }
+    .pull { padding: 28px 20px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-tag, .hero h1, .hero-sub, .hero-meta, .scale-wrap {
+      opacity: 0; transform: translateY(14px);
+      animation: fadeUp .65s cubic-bezier(.2,.7,.3,1) forwards;
+    }
+    .hero-tag   { animation-delay: .05s; }
+    .hero h1    { animation-delay: .15s; }
+    .hero-sub   { animation-delay: .25s; }
+    .hero-meta  { animation-delay: .32s; }
+    .scale-wrap { animation-delay: .42s; }
+    @keyframes fadeUp { to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag">QS World University Rankings 2027 · Analisi</div>
+    <h1>87°<br>con le mani <em>legate</em></h1>
+    <p class="hero-sub">
+      Il Politecnico di Milano non ha medicina. Non ha lettere. Non ha i fondi di MIT o di Oxford.
+      Ha guadagnato 100 posizioni in dieci anni. Questa è l'analisi di cosa significhi davvero quel numero.
+    </p>
+    <div class="hero-meta">Davide De Sanctis · Giugno 2026 · 5 min</div>
+
+    <div class="scale-wrap">
+      <svg class="scale-svg" viewBox="0 0 540 220" role="img"
+        aria-label="Bilancia: vincoli strutturali a sinistra, risultato 87° a destra">
+        <defs>
+          <linearGradient id="gG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F0D080"/>
+            <stop offset="1" stop-color="#C9943A"/>
+          </linearGradient>
+        </defs>
+        <!-- pivot -->
+        <rect x="264" y="55" width="12" height="108" rx="4" fill="#4A6080"/>
+        <polygon points="256,55 284,55 270,40" fill="#4A6080"/>
+        <rect x="220" y="161" width="100" height="9" rx="4" fill="#4A6080"/>
+
+        <!-- LEFT (penalties, down) -->
+        <g transform="rotate(-9,270,60)">
+          <rect x="128" y="58" width="142" height="5" rx="2.5" fill="#6A8098"/>
+          <line x1="143" y1="63" x2="136" y2="115" stroke="#6A8098" stroke-width="1.2"/>
+          <line x1="258" y1="63" x2="251" y2="115" stroke="#6A8098" stroke-width="1.2"/>
+          <rect x="120" y="115" width="146" height="58" rx="10" fill="#8B2E24" fill-opacity=".9"/>
+          <text x="193" y="135" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9.5" fill="white" font-weight="700">SENZA MEDICINA</text>
+          <text x="193" y="150" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9.5" fill="white" font-weight="700">SENZA UMANISTICA</text>
+          <text x="193" y="165" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9.5" fill="white" font-weight="700">FONDI 10× INFERIORI</text>
+        </g>
+
+        <!-- RIGHT (result, up) -->
+        <g transform="rotate(9,270,60)">
+          <rect x="270" y="58" width="142" height="5" rx="2.5" fill="#6A8098"/>
+          <line x1="285" y1="63" x2="284" y2="102" stroke="#6A8098" stroke-width="1.2"/>
+          <line x1="398" y1="63" x2="397" y2="102" stroke="#6A8098" stroke-width="1.2"/>
+          <rect x="268" y="102" width="136" height="62" rx="10" fill="url(#gG)"/>
+          <text x="336" y="124" text-anchor="middle" font-family="'Playfair Display',serif" font-size="30" fill="#0B1F3A" font-weight="900">87°</text>
+          <text x="336" y="145" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#1A3010" font-weight="700">AL MONDO</text>
+          <text x="336" y="159" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="#1A3010" font-weight="700">+11 posizioni</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-num">87°</span>
+        <span class="stat-label">posizione mondiale 2027</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">+100</span>
+        <span class="stat-label">posizioni in 10 anni</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">top 1%</span>
+        <span class="stat-label">su 8.808 università valutate</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<article>
+
+  <div class="section-tag">Il contesto</div>
+  <h2>Un ranking costruito per università generaliste</h2>
+
+  <p>Il QS World University Rankings misura gli atenei su sei indicatori principali: <strong>Academic Reputation</strong> (30%), <strong>Employer Reputation</strong> (15%), <strong>Citations per Faculty</strong> (20%), <strong>Faculty-Student Ratio</strong> (20%), <strong>International Faculty</strong> (5%) e <strong>International Students</strong> (5%). Dall'edizione 2026 si aggiungono indicatori non ponderati di Sustainability, Employment Outcomes e International Research Network.</p>
+
+  <p>La struttura premia esplicitamente le università generaliste con facoltà di medicina e scienze naturali: la medicina genera il volume di pubblicazioni ad alto impatto più elevato in qualsiasi classifica bibliometrica. Oxford, Harvard, UCL, Imperial ospitano ospedali universitari e grandi scuole di scienze naturali che alimentano il punteggio su Citations per Faculty in modo che nessuna università puramente tecnica può replicare, a parità di qualità della ricerca ingegneristica.</p>
+
+  <p>Il Politecnico di Milano è un'università tecnica. Non ha medicina, non ha lettere, non ha psicologia o scienze naturali di base. Compete in questa classifica senza gli asset strutturali che la classifica stessa premia di più — e si trova all'87° posto, primo in Italia.</p>
+
+  <div class="section-tag" style="margin-top:50px">I vincoli strutturali</div>
+  <h2>Le penalizzazioni che nessuna governance può eliminare</h2>
+
+  <div class="penalties">
+    <div class="pill">
+      <div class="pill-icon">CITES</div>
+      <div class="pill-text"><strong>Assenza di medicina e scienze naturali.</strong> Le citazioni per faculty member pesano il 20% del punteggio totale. Le facoltà mediche e di biologia molecolare producono il volume di paper ad alto impatto più elevato in assoluto. Un ateneo tecnico — anche con ricerca eccellente — parte strutturalmente svantaggiato su questo indicatore rispetto a qualsiasi università generalista di pari qualità.</div>
+    </div>
+    <div class="pill">
+      <div class="pill-icon">F/S RATIO</div>
+      <div class="pill-text"><strong>Volumi di studenti elevati.</strong> Il Faculty-Student Ratio vale il 20% del totale. Il Polimi forma decine di migliaia di studenti — un volume che risponde alla domanda sociale di formazione tecnica in Italia — ma che penalizza il rapporto numerico con i docenti rispetto a istituti anglosassoni con numeri chiusi ferrei e rette dieci volte superiori.</div>
+    </div>
+    <div class="pill">
+      <div class="pill-icon">FONDI</div>
+      <div class="pill-text"><strong>Gap di finanziamento strutturale.</strong> MIT, Harvard ed ETH Zürich dispongono di endowment miliardari e ricevono finanziamenti alla ricerca senza paragoni con il sistema universitario italiano. La capacità di assumere faculty internazionale, attrezzare laboratori di frontiera e costruire reti di ricerca globali è proporzionale alle risorse — e qui il divario è di uno o due ordini di grandezza.</div>
+    </div>
+    <div class="pill">
+      <div class="pill-icon">MERCATO</div>
+      <div class="pill-text"><strong>Tessuto industriale nazionale penalizzante.</strong> L'Employer Reputation si costruisce anche attraverso la capacità di piazzare laureati in aziende globali top-tier. Il contesto italiano — pur eccellente in molti settori — ha un tessuto di grandi corporation tecnologiche inferiore a quello anglosassone o americano, riducendo la visibilità internazionale dei laureati Polimi agli occhi dei recruiter globali.</div>
+    </div>
+  </div>
+
+  <div class="section-tag" style="margin-top:50px">Il confronto</div>
+  <h2>Polimi vs Harvard: dove il campo si livella</h2>
+
+  <p>Confrontare Polimi (87°) con Harvard (5°) sul totale è fuorviante senza guardare i singoli indicatori. I dati disponibili e le comunicazioni ufficiali mostrano un quadro molto più articolato di quanto il ranking aggregato suggerisca.</p>
+
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Indicatore QS</th>
+          <th>Peso</th>
+          <th>Polimi</th>
+          <th>Harvard</th>
+          <th>Giudizio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-indicator">Employer Reputation</td>
+          <td class="td-weight">15%</td>
+          <td class="td-polimi">Top 50 globale</td>
+          <td class="td-harvard">Top 5</td>
+          <td><span class="badge badge-close">Vicini</span></td>
+        </tr>
+        <tr>
+          <td class="td-indicator">International Students</td>
+          <td class="td-weight">5%</td>
+          <td class="td-polimi">25% (mediana: 8,8%)</td>
+          <td class="td-harvard">~25%</td>
+          <td><span class="badge badge-win">Pari</span></td>
+        </tr>
+        <tr>
+          <td class="td-indicator">Employment Outcomes</td>
+          <td class="td-weight">—</td>
+          <td class="td-polimi">Top 50 globale</td>
+          <td class="td-harvard">Top 10</td>
+          <td><span class="badge badge-close">Vicini</span></td>
+        </tr>
+        <tr>
+          <td class="td-indicator">Sustainability</td>
+          <td class="td-weight">—</td>
+          <td class="td-polimi">In forte crescita</td>
+          <td class="td-harvard">Top 20</td>
+          <td><span class="badge badge-close">Terreno guadagnato</span></td>
+        </tr>
+        <tr>
+          <td class="td-indicator">Citations per Faculty</td>
+          <td class="td-weight">20%</td>
+          <td class="td-polimi">Limitato da assenza medicina</td>
+          <td class="td-harvard">100/100</td>
+          <td><span class="badge badge-gap">Gap strutturale</span></td>
+        </tr>
+        <tr>
+          <td class="td-indicator">Academic Reputation</td>
+          <td class="td-weight">30%</td>
+          <td class="td-polimi">In crescita costante</td>
+          <td class="td-harvard">100/100</td>
+          <td><span class="badge badge-gap">Legacy gap</span></td>
+        </tr>
+        <tr>
+          <td class="td-indicator">Faculty-Student Ratio</td>
+          <td class="td-weight">20%</td>
+          <td class="td-polimi">Penalizzato da volumi</td>
+          <td class="td-harvard">Eccellente</td>
+          <td><span class="badge badge-gap">Gap di scala</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-note">* Confronto qualitativo basato su dati ufficiali Polimi, comunicazioni QS e stime dalla letteratura di settore. QS non pubblica punteggi disaggregati completi per tutti gli atenei.</div>
+  </div>
+
+  <p>Su <strong>tre indicatori su sette</strong> — quelli dove la struttura istituzionale non penalizza — Polimi è già in territorio comparabile a università tra le prime dieci al mondo. Il divario reale si concentra quasi interamente sugli indicatori dove la mancanza di facoltà mediche e il gap di finanziamento sono determinanti: fattori che nessuna decisione interna può modificare.</p>
+
+  <div class="pull">
+    <p>Togliendo i vincoli strutturali — medicina, fondi, dimensioni delle classi — quello che rimane è un ateneo che compete già oggi con le migliori università di ingegneria e design al mondo. Quel che chiamiamo "87°" è, su quegli indicatori, un risultato da top 30.</p>
+    <div class="pull-attr">— Analisi su dati QS 2027 e comunicazioni ufficiali Polimi</div>
+  </div>
+
+  <div class="section-tag">La traiettoria</div>
+  <h2>Cento posizioni in dieci anni: non è fortuna</h2>
+
+  <div class="trajectory">
+    <div class="traj-title">Posizione QS — Politecnico di Milano</div>
+    <div class="traj-row">
+      <span class="traj-year">2016</span>
+      <div class="traj-bar-wrap"><div class="traj-bar" style="width:26%"></div></div>
+      <span class="traj-pos">#187</span>
+    </div>
+    <div class="traj-row">
+      <span class="traj-year">2019</span>
+      <div class="traj-bar-wrap"><div class="traj-bar" style="width:40%"></div></div>
+      <span class="traj-pos">#149</span>
+    </div>
+    <div class="traj-row">
+      <span class="traj-year">2022</span>
+      <div class="traj-bar-wrap"><div class="traj-bar" style="width:58%"></div></div>
+      <span class="traj-pos">#123</span>
+    </div>
+    <div class="traj-row">
+      <span class="traj-year">2026</span>
+      <div class="traj-bar-wrap"><div class="traj-bar" style="width:80%"></div></div>
+      <span class="traj-pos">#98</span>
+    </div>
+    <div class="traj-row">
+      <span class="traj-year" style="color:var(--gold);font-weight:700">2027</span>
+      <div class="traj-bar-wrap"><div class="traj-bar" style="width:100%"></div></div>
+      <span class="traj-pos" style="color:var(--gold)"><b>#87</b></span>
+    </div>
+  </div>
+
+  <p>Questa traiettoria — <strong>+100 posizioni in dieci anni</strong>, con i vincoli strutturali intatti — non è il risultato di un cambio metodologico favorevole. È il prodotto di scelte precise: internazionalizzazione della faculty e degli studenti (25% contro una mediana globale dell'8,8%), crescita dell'impatto della ricerca (289.758 citazioni nette nel periodo QS), costruzione di una reputazione globale nell'employability che oggi colloca i laureati Polimi tra i più richiesti d'Europa.</p>
+
+  <p>In dieci anni il Polimi ha superato decine di università generaliste ben finanziate — con medicina, scienze naturali, endowment — scalando la classifica con quello che un'università tecnica ha davvero a disposizione: qualità della formazione ingegneristica, legame con l'industria, internazionalizzazione, impatto della ricerca applicata.</p>
+
+  <div class="disclaimer">
+    <div class="disclaimer-tag">Nota metodologica</div>
+    <p>L'analisi "dove sarebbe il Polimi senza i vincoli strutturali" non può essere ridotta a un numero esatto: QS non pubblica punteggi disaggregati per tutti gli atenei e il ranking non è lineare. Quello che i dati mostrano con chiarezza è che il gap rispetto alle università generaliste si concentra quasi interamente su indicatori dove la struttura istituzionale — non la qualità — è determinante. Ogni comparazione con singoli atenei è da intendersi come analisi qualitativa, non come classifica alternativa calcolata.</p>
+  </div>
+
+  <div class="cta">
+    <div class="cta-tag">Fonti</div>
+    <h3>I dati di questa analisi</h3>
+    <p>QS World University Rankings 2027 · Comunicato ufficiale Polimi / DIG (18 giugno 2026) · Metodologia QS: topuniversities.com/methodology · Dati citazioni: Scopus via QS · Harvard position: QS press release, giugno 2026</p>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <b>Davide De Sanctis</b> — Software Developer &amp; Process Engineer<br>
+    Alumnus, Politecnico di Milano.<br>
+    Analisi personale basata su dati pubblici QS 2027.
+  </div>
+</footer>
+
+</body>
+</html>
